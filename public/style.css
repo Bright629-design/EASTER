@@ -1,0 +1,162 @@
+/* =============================================
+   EASTER GREETING — style.css
+   ============================================= */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; min-height: 100%; font-family: 'Nunito', sans-serif; overflow-x: hidden; }
+
+/* DOOR SCREEN */
+#door-screen {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; grid-template-columns: 1fr 1fr;
+  cursor: pointer;
+}
+#door-screen.fading { opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+
+.door-panel { height: 100%; overflow: hidden; position: relative; transition: transform 0.75s cubic-bezier(0.86,0,0.07,1); will-change: transform; }
+.door-panel.left.open  { transform: translateX(-100%); }
+.door-panel.right.open { transform: translateX(100%); }
+.door-panel svg { width: 200%; height: 100%; position: absolute; top: 0; }
+.door-panel.left  svg { left: 0; }
+.door-panel.right svg { right: 0; }
+
+/* touch hint */
+#touch-hint { position: absolute; top: 28%; left: 50%; transform: translateX(-50%); z-index: 210; text-align: center; pointer-events: none; animation: hintFloat 1.6s ease-in-out infinite; }
+@keyframes hintFloat { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(-12px);} }
+.hint-text { font-family:'Fredoka One',cursive; font-size:1.6rem; color:#e03a00; display:block; text-shadow:1px 1px 3px rgba(0,0,0,0.2); }
+.hint-arrow { font-size:2.4rem; color:#e03a00; display:block; animation:arrDrop 0.65s ease-in-out infinite alternate; }
+@keyframes arrDrop { from{transform:translateY(0);} to{transform:translateY(10px);} }
+.hint-bunny { font-size:4.5rem; display:block; animation:bunnyWig 0.85s ease-in-out infinite alternate; }
+@keyframes bunnyWig { from{transform:rotate(-10deg) scale(1);} to{transform:rotate(10deg) scale(1.12);} }
+
+/* GREETING PAGE */
+#greeting { min-height:100vh; background:#fff; padding-bottom:80px; }
+
+/* confetti */
+#cbox { position:fixed; inset:0; pointer-events:none; z-index:100; }
+.cp { position:absolute; top:-20px; border-radius:2px; animation:cpFall linear forwards; }
+@keyframes cpFall { 0%{transform:translateY(0) rotate(0deg);opacity:1;} 85%{opacity:1;} 100%{transform:translateY(108vh) rotate(720deg);opacity:0;} }
+
+/* bg flowers */
+.bg-flower { position:fixed; pointer-events:none; z-index:0; font-size:1.8rem; opacity:0.15; animation:bgFlower ease-in-out infinite alternate; }
+@keyframes bgFlower { from{transform:rotate(-10deg) scale(1);} to{transform:rotate(10deg) scale(1.1);} }
+
+/* side strips */
+.side-strip { position:fixed; top:0; bottom:0; display:flex; flex-direction:column; justify-content:space-evenly; align-items:center; padding:6px 2px; z-index:50; pointer-events:none; width:38px; }
+.side-strip.left{left:0;} .side-strip.right{right:0;}
+.side-strip span { font-size:1.55rem; animation:sideFloat ease-in-out infinite alternate; }
+@keyframes sideFloat { from{transform:translateY(0) scale(1);} to{transform:translateY(-10px) scale(1.2);} }
+
+/* name */
+.name-display { font-family:'Fredoka One',cursive; font-size:clamp(2rem,7vw,3rem); letter-spacing:5px; color:#c01050; min-height:48px; animation:nameGlow 2s ease-in-out infinite alternate; }
+@keyframes nameGlow { from{text-shadow:0 0 8px rgba(192,16,80,0.3);} to{text-shadow:0 0 28px rgba(192,16,80,0.8),0 0 52px rgba(255,60,140,0.35);} }
+
+/* wishing you */
+.wishing-you { font-family:'Fredoka One',cursive; font-size:clamp(1.9rem,6vw,2.8rem); color:#d41010; animation:wishPulse 2.5s ease-in-out infinite; }
+@keyframes wishPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.06);} }
+
+/* countdown */
+.cd-wrap { font-family:'Fredoka One',cursive; font-size:clamp(1rem,3vw,1.25rem); color:#1560b0; line-height:1.6; }
+.cd-num  { color:#e06800; }
+
+/* HAPPY EASTER */
+.he-wrap { text-align:center; }
+.he-row  { display:flex; justify-content:center; align-items:flex-end; gap:2px; }
+.candy-letter { font-family:'Fredoka One',cursive; font-size:clamp(3rem,13vw,6rem); display:inline-block; line-height:1; -webkit-text-stroke:2px rgba(255,255,255,0.35); paint-order:stroke fill; filter:drop-shadow(0 4px 0 rgba(0,0,0,0.2)) drop-shadow(0 6px 8px rgba(0,0,0,0.12)); animation:cLetter 0.6s ease-in-out infinite alternate; cursor:default; }
+.candy-letter:nth-child(1){animation-delay:0.00s;} .candy-letter:nth-child(2){animation-delay:0.08s;} .candy-letter:nth-child(3){animation-delay:0.16s;} .candy-letter:nth-child(4){animation-delay:0.24s;} .candy-letter:nth-child(5){animation-delay:0.32s;} .candy-letter:nth-child(6){animation-delay:0.40s;}
+@keyframes cLetter { 0%{transform:translateY(0) rotate(-4deg) scale(1);} 100%{transform:translateY(-18px) rotate(4deg) scale(1.1);} }
+.row-easter .candy-letter { animation-name:cShake; }
+.row-easter .candy-letter:nth-child(1){animation-delay:0.04s;} .row-easter .candy-letter:nth-child(2){animation-delay:0.12s;} .row-easter .candy-letter:nth-child(3){animation-delay:0.20s;} .row-easter .candy-letter:nth-child(4){animation-delay:0.28s;} .row-easter .candy-letter:nth-child(5){animation-delay:0.36s;} .row-easter .candy-letter:nth-child(6){animation-delay:0.44s;}
+@keyframes cShake { 0%{transform:translateX(-4px) rotate(-5deg) scale(1);} 33%{transform:translateX(5px) rotate(6deg) scale(1.09);} 66%{transform:translateX(-4px) rotate(-6deg) scale(1.07);} 100%{transform:translateX(3px) rotate(4deg) scale(1.1);} }
+
+/* bunnies */
+.bunny-emoji { font-size:clamp(4rem,12vw,6rem); display:inline-block; filter:drop-shadow(0 6px 10px rgba(0,0,0,0.12)); }
+.b1-anim { animation:b1 1.2s ease-in-out infinite alternate; }
+.b2-anim { animation:b2 1.4s ease-in-out infinite alternate; }
+@keyframes b1 { from{transform:translateY(0) rotate(-3deg);} to{transform:translateY(-18px) rotate(3deg);} }
+@keyframes b2 { from{transform:translateY(-5px) rotate(3deg);} to{transform:translateY(-22px) rotate(-3deg);} }
+
+/* wish lines */
+.wish-block { text-align:center; }
+.wish-line { font-family:'Fredoka One',cursive; font-size:clamp(0.9rem,2.6vw,1.12rem); line-height:2; display:block; animation:wlPop ease-in-out infinite alternate; }
+@keyframes wlPop { from{transform:scale(1);} to{transform:scale(1.04);} }
+
+/* eggs */
+.egg-item { font-size:2.4rem; display:inline-block; animation:eggWig ease-in-out infinite alternate; cursor:pointer; }
+.egg-item:hover { transform:scale(1.4) rotate(20deg) !important; }
+@keyframes eggWig { from{transform:rotate(-8deg) translateY(0);} to{transform:rotate(8deg) translateY(-8px);} }
+.egg-item.popped { animation:eggPop 0.4s ease forwards !important; }
+@keyframes eggPop { 0%{transform:scale(1);} 40%{transform:scale(1.8) rotate(25deg);} 70%{transform:scale(0.7);} 100%{transform:scale(1.2);} }
+
+/* stats box */
+.stats-box {
+  background: linear-gradient(135deg, #fff8f0, #fff0f8);
+  border: 2px solid #ffcce0;
+  border-radius: 16px;
+  padding: 10px 24px;
+  margin-bottom: 14px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  color: #c01050;
+  min-height: 20px;
+  text-align: center;
+  display: none;
+}
+
+/* Share buttons container */
+.share-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+/* WhatsApp button */
+.wa-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px;
+  background: #25d366;
+  color: #fff; border: none; cursor: pointer;
+  font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+  border-radius: 50px;
+  padding: 13px 28px;
+  box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.wa-btn:hover  { transform:translateY(-2px); box-shadow:0 10px 28px rgba(37,211,102,0.55); }
+.wa-btn:active { transform:scale(0.96); }
+
+/* Instagram button */
+.ig-btn {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #fff; border: none; cursor: pointer;
+  font-family: 'Fredoka One', cursive; font-size: 1.1rem;
+  border-radius: 50px;
+  padding: 13px 28px;
+  box-shadow: 0 6px 20px rgba(188,24,136,0.40);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.ig-btn:hover  { transform:translateY(-2px); box-shadow:0 10px 28px rgba(188,24,136,0.55); }
+.ig-btn:active { transform:scale(0.96); }
+
+/* toast */
+.toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%) translateY(20px); background:#222; color:#fff; border-radius:50px; padding:10px 24px; font-weight:700; opacity:0; transition:all 0.3s; pointer-events:none; z-index:300; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* input bar */
+.input-bar { position:fixed; bottom:0; left:0; right:0; display:flex; z-index:150; box-shadow:0 -4px 20px rgba(0,0,0,0.15); }
+.input-bar input { flex:1; padding:16px 20px; border:none; outline:none; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700; background:#1a7a30; color:#fff; }
+.input-bar input::placeholder { color:rgba(255,255,255,0.78); }
+.input-bar button { padding:16px 28px; border:none; cursor:pointer; font-family:'Fredoka One',cursive; font-size:1.1rem; background:#c0180c; color:#fff; white-space:nowrap; transition:background 0.18s; }
+.input-bar button:hover { background:#9a1008; }
+
+@media(max-width:480px) {
+  .side-strip{width:28px;} .side-strip span{font-size:1.2rem;}
+  .candy-letter{font-size:clamp(2.4rem,11vw,5rem);}
+  .bunny-emoji{font-size:clamp(3rem,10vw,5rem);}
+  .input-bar input{padding:14px 12px;font-size:0.92rem;}
+  .input-bar button{padding:14px 16px;font-size:1rem;}
+}
