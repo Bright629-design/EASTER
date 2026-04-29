@@ -1,10 +1,9 @@
-# Happy Easter Greeting App 
+# Happy Easter Greeting App
 
 A personalized, animated Easter greeting web app. Share a custom link with anyone's name and they get a unique, interactive Easter experience — complete with animations, music, and one-tap WhatsApp/Instagram sharing.
 
 🔗 **Live Site:** [happyeaster-theta.vercel.app](https://happyeaster-theta.vercel.app)  
-**Example:** [happyeaster-theta.vercel.app/?n=Emilio](https://happyeaster-theta.vercel.app/?n=Emilio)
----
+
 ## Features
 
 - **Personalized Greetings** — Name passed via `?n=` URL query parameter renders dynamically on the page
